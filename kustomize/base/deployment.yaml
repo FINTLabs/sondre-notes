@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sondre-notes
+spec:
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/port: "8080"
+        prometheus.io/scrape: "true"
+    spec:
+      containers:
+        - name: sondre-notes
+          image: "ghcr.io/fintlabs/sondre-notes:sha-0000000"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: logging.level.no.fintlabs
+              value: DEBUG
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            limits:
+              memory: 64Mi
+              cpu: 25m
+            requests:
+              memory: 64Mi
+              cpu: 25m

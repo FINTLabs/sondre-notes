@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: sondre
+resources:
+  - service.yaml
+  - deployment.yaml
+
+commonLabels:
+  app.kubernetes.io/name: sondre-notes
+  app.kubernetes.io/instance: sondre-notes
+  app.kubernetes.io/version: "latest"
+  app.kubernetes.io/managed-by: GA
+  app.kubernetes.io/component: backend
+  app.kubernetes.io/part-of: sondre-notes
+  fintlabs.no/team: flais
+  fintlabs.no/org-id: flais.io
